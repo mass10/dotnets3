@@ -8,7 +8,47 @@ namespace dotnets3
 		{
 			try
 			{
-				new Application().Run();
+				// コマンドライン引数の解析
+				var profileName = "";
+				var bucketName = "";
+				var key = "";
+
+				var currentSection = "";
+				foreach (var arg in args)
+				{
+					// System.Console.WriteLine("[DEBUG] arg: " + arg);
+					if (arg.StartsWith("--"))
+					{
+						currentSection = arg.Substring(2);
+						//System.Console.WriteLine("[DEBUG] currentSection: " + currentSection);
+					}
+					else
+					{
+						switch (currentSection)
+						{
+							case "profile":
+								// プロファイル名
+								System.Console.WriteLine("[DEBUG] profile: " + arg);
+								profileName = arg;
+								break;
+							case "bucket":
+								// バケット名
+								System.Console.WriteLine("[DEBUG] bucket: " + arg);
+								bucketName = arg;
+								break;
+							case "key":
+								// キー
+								System.Console.WriteLine("[DEBUG] key: " + arg);
+								key = arg;
+								break;
+							default:
+								System.Console.WriteLine("[ERROR] 不明なオプション: " + arg);
+								break;
+						}
+					}
+				}
+
+				new Application(profileName).Run();
 			}
 			catch (Exception e)
 			{
@@ -19,11 +59,16 @@ namespace dotnets3
 
 	class Application
 	{
+		private readonly string profileName;
+
+		public Application(string profileName)
+		{
+			this.profileName = profileName;
+		}
+
 		public void Run()
 		{
-			string profileName = "irisawamasaru";
-
-			var service = new S3Service(profileName);
+			var service = new S3Service(this.profileName);
 
 			// list buckets
 			var buckets = service.ListBuckets(profileName);
