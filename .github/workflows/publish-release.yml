@@ -49,6 +49,6 @@ jobs:
 
     - name: Create a new release
       run: |
-        r-gh-create-release --file "bin\Release\net5.0\dotnets3.exe"
+        r-gh-create-release --file "bin\Release\net6.0\dotnets3.exe"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
