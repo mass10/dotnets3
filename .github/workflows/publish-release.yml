@@ -49,6 +49,14 @@ jobs:
 
     - name: Create a new release
       run: |
-        r-gh-create-release --file "bin\Release\net6.0\dotnets3.exe"
+        r-gh-create-release `
+          --file bin\Release\net6.0\AWSSDK.Core.dll `
+          --file bin\Release\net6.0\AWSSDK.S3.dll `
+          --file bin\Release\net6.0\dotnets3.dll `
+          --file bin\Release\net6.0\dotnets3.exe `
+          --file bin\Release\net6.0\dotnets3.pdb `
+          --file bin\Release\net6.0\dotnets3.runtimeconfig.json `
+          --file bin\Release\net6.0\Newtonsoft.Json.dll
+
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
