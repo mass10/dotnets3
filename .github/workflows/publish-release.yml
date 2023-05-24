@@ -21,12 +21,6 @@ jobs:
       with:
         fetch-depth: 0
 
-#     # Install the .NET Core workload
-#     - name: Install .NET Core
-#       uses: actions/setup-dotnet@v3
-#       with:
-#         dotnet-version: 6.0.x
-
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
@@ -54,7 +48,6 @@ jobs:
           --file bin\Release\net6.0\AWSSDK.S3.dll `
           --file bin\Release\net6.0\dotnets3.dll `
           --file bin\Release\net6.0\dotnets3.exe `
-          --file bin\Release\net6.0\dotnets3.pdb `
           --file bin\Release\net6.0\dotnets3.runtimeconfig.json `
           --file bin\Release\net6.0\Newtonsoft.Json.dll
 
